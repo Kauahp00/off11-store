@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produto | OFF11</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="img/bag.png" type="image/x-icon" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f9f9f9;
+    }
+
+    .topo {
+      height: 70px;
+      background-color: #000000;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+    }
+
+    .topoIn {
+      max-width: 1000px;
+      margin: auto;
+      align-items: center;
+      height: 100%;
+
+    }
+
+    .logoo img {
+
+      height: 45px;
+    }
+
+    .menuDesktop ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    /* Estilo atualizado para hover mais bonito */
+    .menuDesktop li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      transition: color 0.3s ease;
+    }
+
+    .menuDesktop li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #28207B;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .menuDesktop li a:hover {
+      color: #ce58ff; /* roxo vibrante */
+    }
+
+    .menuDesktop li a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      flex: 1;
+      padding: 100px 20px 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .produto-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .produto-container img {
+      max-width: 100%;
+      width: 400px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .produto-info {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .produto-info h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .produto-info p {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .preco {
+      font-size: 24px;
+      font-weight: bold;
+      color: #28207B;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: #28207B;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0e0a39;
+    }
+
+    footer {
+      background-color: #0b0f0f;
+      color: #fff;
+      text-align: center;
+      padding: 5px 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .produto-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .produto-container img {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .topoIn {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topo">
+      <div class="topoIn">
+          <div class="logoo">
+              <img src="img/logo2.png" alt="SeuLogo" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="produto-container">
+      <img id="imgProduto" src="" alt="Camisa" />
+      <div class="produto-info">
+        <h1 id="tituloProduto">Carregando...</h1>
+        <p id="descricaoProduto"></p>
+        <div class="preco" id="precoProduto"></div>
+        <button class="btn" onclick="history.back()">← Voltar</button>
+        <a id="whatsLink" target="_blank"><button class="btn">💬 Comprar no WhatsApp</button></a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Desenvolvido por OFF11
+  </footer>
+
+  <script>
+    const produtos = {
+      palmeiras: {
+        nome: "Camisa Palmeiras 2024",
+        descricao: "Camisa oficial do Palmeiras com escudo bordado e tecido dryfit.",
+        preco: "R$ 119,99",
+        imagem: "img/palmeiras.png"
+      },
+      SP: {
+        nome: "Camisa São Paulo 2024",
+        descricao: "Modelo oficial do São Paulo com acabamento premium.",
+        preco: "R$ 119,99",
+        imagem: "img/Sp.jpg"
+      },
+      SCCP: {
+        nome: "Camisa Corinthians 2024",
+        descricao: "Design moderno do Timão com escudo emborrachado.",
+        preco: "R$ 119,99",
+        imagem: "img/SCCP.jpg"
+      },
+      SANTOS: {
+        nome: "Camisa Santos 2024",
+        descricao: "Camisa branca clássica com gola diferenciada.",
+        preco: "R$ 119,99",
+        imagem: "img/santos.jpeg"
+      },
+      FLA: {
+        nome: "Camisa Flamengo 2024",
+        descricao: "Flamengo rubro-negro com tecido respirável.",
+        preco: "R$ 119,99",
+        imagem: "img/flamengo.jpeg"
+      },
+      VASCO: {
+        nome: "Camisa Vasco 2024",
+        descricao: "Modelo oficial do Vasco com faixa diagonal clássica.",
+        preco: "R$ 119,99",
+        imagem: "img/vasco.jpg"
+      },
+      BARCELONA: {
+        nome: "Camisa Barcelona 23/24",
+        descricao: "Uniforme azul-grená da temporada europeia.",
+        preco: "R$ 119,99",
+        imagem: "img/barcelona.jpeg"
+      },
+      REAL: {
+        nome: "Camisa Real Madrid 2024",
+        descricao: "Modelo branco elegante com detalhes dourados.",
+        preco: "R$ 119,99",
+        imagem: "img/realMadrid.jpg"
+      },
+      CITY: {
+        nome: "Camisa Manchester City 2024",
+        descricao: "Celeste com detalhes em branco. Alta performance.",
+        preco: "R$ 119,99",
+        imagem: "img/city.jpeg"
+      },
+      BAYERN: {
+        nome: "Camisa Bayern 2024",
+        descricao: "Vermelha com patrocínios e escudo bordado.",
+        preco: "R$ 119,99",
+        imagem: "img/bayern.jpeg"
+      },
+      CHELSEA: {
+        nome: "Camisa Chelsea 2024",
+        descricao: "Modelo azul intenso da Premier League.",
+        preco: "R$ 119,99",
+        imagem: "img/chelsea.jpg"
+      },
+      BOCA: {
+        nome: "Camisa Boca Juniors",
+        descricao: "Azul e amarela retrô com gola especial.",
+        preco: "R$ 159,99",
+        imagem: "img/boca.jpeg"
+      },
+      RIVER: {
+        nome: "Camisa River Plate",
+        descricao: "Faixa diagonal vermelha. Tradição sul-americana.",
+        preco: "R$ 159,99",
+        imagem: "img/river.jpg"
+      },
+      PENAROL: {
+        nome: "Camisa Peñarol",
+        descricao: "Listrada preta e amarela com design clássico.",
+        preco: "R$ 159,99",
+        imagem: "img/penarol.jpeg"
+      },
+      MEXICO: {
+        nome: "Camisa Seleção México",
+        descricao: "Verde com detalhes modernos, edição limitada.",
+        preco: "R$ 159,99",
+        imagem: "img/mexico.jpg"
+      },
+      MILAN: {
+        nome: "Camisa Retrô Milan",
+        descricao: "Camisa histórica do Milan em edição retrô.",
+        preco: "R$ 159,99",
+        imagem: "img/RetroMilan.jpg"
+      },
+      palmeiras2: {
+        nome: "Camisa Retrô Palmeiras",
+        descricao: "Camisa vintage do Verdão, edição especial.",
+        preco: "R$ 159,99",
+        imagem: "img/retroPalmeiras.jpg"
+      },
+      SCCP2: {
+        nome: "Camisa Retrô Corinthians",
+        descricao: "Modelo retrô com gola polo e escudo antigo.",
+        preco: "R$ 159,99",
+        imagem: "img/retroCorinthians.jpeg"
+      },
+      HOLANDA: {
+        nome: "Camisa Retrô Holanda",
+        descricao: "Icônica camisa laranja da seleção holandesa.",
+        preco: "R$ 159,99",
+        imagem: "img/retroHolanda.jpg"
+      }
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const produtoId = urlParams.get("id");
+    const produto = produtos[produtoId];
+
+    if (produto) {
+      document.getElementById("imgProduto").src = produto.imagem;
+      document.getElementById("tituloProduto").textContent = produto.nome;
+      document.getElementById("descricaoProduto").textContent = produto.descricao;
+      document.getElementById("precoProduto").textContent = produto.preco;
+      document.getElementById("whatsLink").href =
+        `https://wa.me/15996128644?text=Olá, quero comprar a ${encodeURIComponent(produto.nome)} por ${encodeURIComponent(produto.preco)}`;
+    } else {
+      document.querySelector("main").innerHTML =
+        "<h2>Produto não encontrado</h2><p>Volte à loja e escolha outro item.</p>";
+    }
+  </script>
+</body>
+
+</html>
